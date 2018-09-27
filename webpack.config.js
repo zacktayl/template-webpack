@@ -12,9 +12,9 @@ module.exports = {
 		extensions: ['.js', '.html']
 	},
 	output: {
-		path: __dirname + '/public',
-		filename: '[name].js',
-		chunkFilename: '[name].[id].js'
+		path: __dirname + (prod ? '/build' : '/public'),
+    filename: 'components.js',
+    library: 'components'
 	},
 	module: {
 		rules: [
@@ -27,7 +27,8 @@ module.exports = {
 						skipIntroByDefault: true,
 						nestedTransitions: true,
 						emitCss: true,
-						hotReload: true
+            hotReload: true,
+            customElement: true
 					}
 				}
 			},
@@ -47,7 +48,7 @@ module.exports = {
 	mode,
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: '[name].css'
+			filename: 'components.css'
 		})
 	],
 	devtool: prod ? false: 'source-map'
